@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <title>Voyage</title>
+  <link rel="icon" href="/ico.png">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+  <div class = "container blur">
+    <div class = "row first">
+      <div class = "mid">
+        <a href="/"><img src = "/logo.png" width="20%"></a>
+      </div>
+    </div>
+    <div class = "row">
+      <div class = "main">
+        <form method="POST">
+          <h2>Зарегистрируйтесь в системе</h2>
+          <div class="forform">
+            <label>
+              <input type="text" name="username" placeholder="Логин" autofocus="true">
+            </label>
+          </div>
+          <div class="errors" th:text="${usernameError}"></div>
+          <div class="forform">
+            <label>
+              <input type="text" name="firstname" placeholder="Ваше имя">
+            </label>
+          </div>
+          <div class="forform">
+            <label>
+              <input type="text" name="lastname" placeholder="Ваша фамилия">
+            </label>
+          </div>
+          <div class="forform">
+            <label>
+              <input type="email" name="email" placeholder="Email">
+            </label>
+          </div>
+          <div class="forform">
+            <label>
+              <input type="password" name="password" placeholder="Пароль">
+            </label>
+          </div>
+          <div class="forform">
+            <label>
+              <input type="password" name="passwordConfirm" placeholder="Повторите пароль">
+            </label>
+          </div>
+          <div class="errors" th:text="${passwordError}"></div>
+          <button type="submit" class="butt">Зарегистрироваться</button>
+        </form>
+        <h4 class="otstup"><a class="mylink" href="/">Назад</a></h4>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

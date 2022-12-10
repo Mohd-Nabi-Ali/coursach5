@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <title>Voyage</title>
+  <link rel="icon" href="/ico.png">
+  <link rel="stylesheet" type="text/css" href="/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+<div class="blur">
+  <div class = "first">
+    <div class = "mid">
+      <a href="/"><img src = "/logo.png" width="20%"></a>
+    </div>
+  </div>
+  <div class="main">
+    <div class="container">
+      <ul class="menu" style="font-size: 20px;">
+        <li class="col-sm-4 col-xs-12"><a href="admin/add">Добавление тура</a></li>
+        <li class="col-sm-4 col-xs-12"><a href="admin/find">Фильтрация</a></li>
+        <li class="col-sm-4 col-xs-12"><a href="admin/edit">Редактирование тура</a></li>
+      </ul>
+    </div>
+    <div class="container" style="margin-top: 15px;">
+      <table style="text-align: center">
+        <thead>
+          <th class="mid"><h4>Логин</h4></th>
+          <th class="mid"><h4>Имя</h4></th>
+          <th class="mid"><h4>Фамилия</h4></th>
+          <th class="mid"><h4>Купленные путёвки</h4></th>
+          <th class="mid"><h4>Email</h4></th>
+          <th class="mid" style="width: 80px;"><h4>Id</h4></th>
+          <th class="mid"><h4>Действие</h4></th>
+        </thead>
+        <th:block th:each="user: ${allUsers}">
+          <tr>
+            <td class="col2"><h3 th:text="${user.username}"></h3></td>
+            <td class="col2"><h3 th:text="${user.firstname}"></h3></td>
+            <td class="col2"><h3 th:text="${user.lastname}"></h3></td>
+            <td class="col2">
+              <th:block th:each="tour: ${user.tours}"><h3 th:text="${tour.start}+'-'+${tour.finish}"></h3></th:block>
+            </td>
+            <td class="col2"><h3 th:text="${user.email}"></h3></td>
+            <td class="col2"><h3 th:text="${user.id}"></h3></td>
+            <td class="col2">
+              <form method="post">
+                <input type="hidden" name="userId" th:value="${user.id}"/>
+                <input type="hidden" name="action" th:value="delete"/>
+                <button type="submit" class="butt">Удалить</button>
+              </form>
+            </td>
+          </tr>
+        </th:block>
+      </table>
+    </div>
+    <h4 class="otstup"><a class="mylink" href="/">Назад</a></h4>
+  </div>
+</div>
+</body>
+</html>

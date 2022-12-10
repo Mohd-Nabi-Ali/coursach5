@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Voyage</title>
+    <link rel="icon" href="/ico.png">
+    <link rel="stylesheet" type="text/css" href="/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+    <div class = "blur">
+        <div style="margin-top: 1em;">
+            <div class = "mid">
+                <a href="/"><img src = "/logo.png" width="20%"></a>
+            </div>
+        </div>
+        <div class = "main">
+            <div class="container">
+                <ul class="menu">
+                    <li class="col-sm-4 col-xs-12"><a href="/personal">Личный кабинет</a></li>
+                    <li class="col-sm-4 col-xs-12"><a href="/booking" class="active">Поиск туров</a></li>
+                    <li class="col-sm-4 col-xs-12"><a href="/logout" th:text="'Выйти ('+${nickname}+')'"></a></li>
+                </ul>
+            </div>
+            <div class="container">
+                <div>
+                    <form method="POST">
+                        <h2>Выберите путёвку</h2>
+                        <div class="forform">
+                            <input type="text" name="start" placeholder="Из" class="fform">
+                        </div>
+                        <div class="forform">
+                            <input type="text" name="finish" placeholder="В" class="fform">
+                        </div>
+                        <div class="forform">
+                            <input type="date" name="date" class="fform">
+                        </div>
+                        <div class="forform">
+                            <input type="number" name="count" value="0" class="fform">
+                        </div>
+                        <input type="hidden" name="action" th:value="filter"/>
+                        <button type="submit" class="butt">Поиск</button>
+                    </form>
+                    <div class="errors" style="margin-top: 10px;" th:text="${filterError}"></div>
+                </div>
+                <table style="margin-top: 2em;">
+                    <thead>
+                    <th><h4 class="mid">Пункт отправления</h4></th>
+                    <th><h4 class="mid">Пункт назначения</h4></th>
+                    <th><h4 class="mid">Стоимость тура</h4></th>
+                    <th><h4 class="mid">Дата отправления</h4></th>
+                    <th><h4 class="mid">Кол-во путёвок</h4></th>
+                    <th><h4 class="mid">Действие</h4></th>
+                    </thead>
+                    <th:block th:each="tour: ${FilteredTours}">
+                        <tr>
+                            <th:block th:if="${tour.count!=0}">
+                                <td class="col2"><h3 th:text="${tour.start}"></h3></td>
+                                <td class="col2"><h3 th:text="${tour.finish}"></h3></td>
+                                <td class="col2"><h3 th:text="${tour.price}"></h3></td>
+                                <td class="col2"><h3 th:text="${tour.date}"></h3></td>
+                                <td class="col2"><h3 th:text="${tour.count}"></h3></td>
+                                <td class="col2">
+                                    <form method="post">
+                                        <input type="hidden" name="tourId" th:value="${tour.id}"/>
+                                        <input type="hidden" name="action" th:value="view"/>
+                                        <button type="submit" class="butt">Посмотреть</button>
+                                    </form>
+                                </td>
+                            </th:block>
+                        </tr>
+                    </th:block>
+                </table>
+                <h4 class="otstup"><a class="mylink" href="/">Назад</a></h4>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+version: '3'
+services:
+  app:
+    container_name: spring
+    build: ./
+    restart: always
+    working_dir: /working_dir
+    depends_on:
+      - tcdb
+    volumes:
+      - ./:/working_dir
+    command: mvn clean spring-boot:run
+    ports:
+      - 8080:8080
+  tcdb:
+    container_name: mysql
+    hostname: tcdb
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - sqlfiles:/var/lib/mysql
+    ports:
+      - 3306:3306
+volumes:
+  sqlfiles:

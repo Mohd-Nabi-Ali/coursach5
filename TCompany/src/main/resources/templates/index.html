@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Voyage</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link rel="icon" href="/ico.png">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+  <div class = "blur">
+    <div class = "first">
+      <div class = "mid">
+        <a href="/"><img src = "/logo.png" width="20%"></a>
+      </div>
+    </div>
+    <div class = "main">
+      <div sec:authorize="isAuthenticated()">
+        <link rel="stylesheet" type="text/css" href="/bootstrap.css">
+        <div class="container">
+          <ul class="menu">
+            <li class="col-sm-4 col-xs-12"><a href="/personal">Личный кабинет</a></li>
+            <li class="col-sm-4 col-xs-12"><a href="/booking">Поиск туров</a></li>
+            <li class="col-sm-4 col-xs-12"><a href="/logout" th:text="'Выйти ('+${nickname}+')'"></a></li>
+          </ul>
+        </div>
+      </div>
+      <h1>Добро пожаловать на сайт туркомпании "Voyage"!</h1>
+      <div sec:authorize="!isAuthenticated()">
+        <h2>Ниже представлены Ваши первые возможности:</h2>
+        <h4 class="otstup"><a class="mylink" href="/login">Войти</a></h4>
+        <h4 class="otstup"><a class="mylink" href="/registration">Зарегистрироваться</a></h4>
+      </div>
+
+      <div sec:authorize="isAuthenticated()">
+        <h2 th:text="'Приветствуем Вас, ' + ${lastname} + ' ' + ${name} + '!'"></h2>
+      </div>
+
+      <div sec:authorize="hasRole('ADMIN')">
+        <h4 class="otstup"><a class="mylink" href="/admin">Администратор</a></h4>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
